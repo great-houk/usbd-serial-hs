@@ -68,7 +68,7 @@ where
         write_store: WS,
     ) -> SerialPort<'_, B, RS, WS> {
         SerialPort {
-            inner: CdcAcmClass::new(alloc, 64),
+            inner: CdcAcmClass::new(alloc, 512),
             read_buf: Buffer::new(read_store),
             write_buf: Buffer::new(write_store),
             write_state: WriteState::Idle,
@@ -143,7 +143,7 @@ where
         }
 
         let r = buf.read(data.len(), |buf_data| {
-            &data[..buf_data.len()].copy_from_slice(buf_data);
+            data[..buf_data.len()].copy_from_slice(buf_data);
 
             Ok(buf_data.len())
         });
