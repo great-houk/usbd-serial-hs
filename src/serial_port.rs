@@ -49,9 +49,7 @@ where
     pub fn new(
         alloc: &UsbBusAllocator<B>,
     ) -> SerialPort<'_, B, DefaultBufferStore, DefaultBufferStore> {
-        SerialPort::new_with_store(alloc, unsafe { mem::uninitialized() }, unsafe {
-            mem::uninitialized()
-        })
+        SerialPort::new_with_store(alloc, unsafe { mem::zeroed() }, unsafe { mem::zeroed() })
     }
 }
 
